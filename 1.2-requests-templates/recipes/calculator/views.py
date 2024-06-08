@@ -28,3 +28,7 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def calculate(request, recipe_name):
+    serv = int(request.GET.get('servings',1))
+    context = {'recipe': {ing:kol*serv for (ing,kol) in DATA[recipe_name].items()}}
+    return render(request, 'calculator/index.html', context)
