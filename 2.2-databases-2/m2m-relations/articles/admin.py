@@ -9,7 +9,7 @@ class ScopeInlineFormset(BaseInlineFormSet):
         for form in self.forms:
             # В form.cleaned_data будет словарь с данными
             # каждой отдельной формы, которые вы можете проверить
-                form.cleaned_data
+            form.cleaned_data
             # вызовом исключения ValidationError можно указать админке о наличие ошибки
             # таким образом объект не будет сохранен,
             # а пользователю выведется соответствующее сообщение об ошибке
