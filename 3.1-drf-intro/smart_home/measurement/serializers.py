@@ -15,3 +15,9 @@ class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
         fields = ['id','name','description']
+
+class SensorsDetailSerializer(serializers.ModelSerializer):
+    measurements = MeasurementSerializer(many=True)
+    class Meta:
+        model = Sensor
+        fields = ['id','name','description','measurements']
