@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
-
-
+from django_filters import FilterSet, DateFromToRangeFilter, ChoiceFilter
 class AdvertisementStatusChoices(models.TextChoices):
     """Статусы объявления."""
 
@@ -28,3 +27,11 @@ class Advertisement(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+class AdvFilter(FilterSet):
+
+    created_at = DateFromToRangeFilter()
+    status = ChoiceFilter()
+    class Meta:
+        model = Advertisement
+        fields = ['created_at', 'status']
+
