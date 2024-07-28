@@ -26,7 +26,7 @@ def student_factory():
 def test_get_course(api_client, course_factory):
 
     course = course_factory()
-    url = reverse('courses-retrieve', kwargs={'pk': course.id})
+    url = reverse('courses-detail', kwargs={'pk': course.id})
     response = api_client.get(url)
     assert response.data['id'] == course.id
     assert response.data['name'] == course.name
@@ -44,7 +44,7 @@ def test_list_courses(api_client, course_factory):
 
 @pytest.mark.django_db
 def test_create_course(api_client):
-    url = reverse('courses-create')
+    url = reverse('courses-list')
     response = api_client.post(url, data={'name': 'test'}, format='json')
     assert response.data['name'] == 'test'
     assert response.status_code == 201
@@ -53,7 +53,7 @@ def test_create_course(api_client):
 def test_update_course(api_client, course_factory):
 
     course = course_factory()
-    url = reverse('courses-update', kwargs={'pk': course.id})
+    url = reverse('courses-detail', kwargs={'pk': course.id})
     if course.name == 'test':
         course.name = 'test2'
         course.save()
@@ -64,7 +64,7 @@ def test_update_course(api_client, course_factory):
 @pytest.mark.django_db
 def test_delete_course(api_client, course_factory):
     course = course_factory()
-    url = reverse('courses-destroy', kwargs={'pk': course.id})
+    url = reverse('courses-detail', kwargs={'pk': course.id})
     response = api_client.delete(url)
     assert response.status_code == 204
 
